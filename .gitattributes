@@ -1,2 +1,4 @@
 *.css diff=css
 *.css linguist-vendored
+*.html diff=html
+*.html linguist-vendored
