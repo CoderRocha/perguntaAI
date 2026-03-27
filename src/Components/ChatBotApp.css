@@ -60,15 +60,15 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.chat-list-item:first-of-type {
-  background: linear-gradient(135deg, #e91e8c, #9c27b0);
+.chat-list-item.active {
+  background: linear-gradient(135deg, #f42f5f, #8e25bf);
 }
 
-.chat-list-item:first-of-type h4 {
+.chat-list-item.active h4 {
   color: #fff;
 }
 
-.chat-list-item:not(:first-of-type):hover {
+.chat-list-item:not(.active):hover {
   background: rgba(255, 255, 255, 0.09);
 }
 
