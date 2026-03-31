@@ -135,6 +135,7 @@
 
 .chat::-webkit-scrollbar {
   width: 4px;
+  display: none;
 }
 
 .chat::-webkit-scrollbar-thumb {
@@ -178,6 +179,7 @@
   font-size: 13px;
   color: rgba(255, 255, 255, 0.5);
   padding: 8px 32px;
+  margin-bottom: -3rem;
 }
 
 .msg-form {
@@ -186,6 +188,7 @@
   gap: 14px;
   padding: 16px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
+  min-height: 10rem;
 }
 
 .emoji {
