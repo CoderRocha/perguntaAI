@@ -1,19 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useMemo } from 'react'
 import './ChatBotApp.css'
 import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
 export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setActiveChat, onNewChat }) {
     const [inputValue, setInputValue] = useState('')
-    const [messages, setMessages] = useState(chats[0]?.messages || [])
+    const messages = useMemo(() => chats.find(chat => chat.id === activeChat)?.messages || [], [chats, activeChat])
     const [isTyping, setIsTyping] = useState(false)
     const [showEmojiPicker, setShowEmojiPicker] = useState(false)
     const chatEndRef = useRef(null)
-
-    useEffect(() => {
-        const activeChatObj = chats.find(chat => chat.id === activeChat)
-        setMessages(activeChatObj ? activeChatObj.messages : [])
-    }, [activeChat, chats])
 
     const handleEmojiSelect = (emoji) => {
         setInputValue((prevInput) => prevInput + emoji.native)
@@ -39,7 +34,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
             setInputValue('')
         } else {
             const updatedMessages = [...messages, newMessage]
-            setMessages(updatedMessages)
+            localStorage.setItem(activeChat, JSON.stringify(updatedMessages))
             setInputValue('')
 
             const updatedChats = chats.map((chat) => {
@@ -49,9 +44,10 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
                 return chat
             })
             setChats(updatedChats)
+            localStorage.setItem('chats', JSON.stringify(updatedChats))
             setIsTyping(true)
 
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            const response = await fetch(`${import.meta.env.VITE_OPENAI_API_URL}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -75,7 +71,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
             }
 
             const updatedMessagesWithResponse = [...updatedMessages, newResponse]
-            setMessages(updatedMessagesWithResponse)
+            localStorage.setItem(activeChat, JSON.stringify(updatedMessagesWithResponse))
             setIsTyping(false)
 
             const updatedChatsWithResponse = chats.map((chat) => {
@@ -85,6 +81,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
                 return chat
             })
             setChats(updatedChatsWithResponse)
+            localStorage.setItem('chats', JSON.stringify(updatedChatsWithResponse))
         }
     }
 
@@ -106,6 +103,8 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
     const handleDeleteChat = (id) => {
         const updatedChats = chats.filter(chat => chat.id !== id)
         setChats(updatedChats)
+        localStorage.setItem('chats', JSON.stringify(updatedChats))
+        localStorage.removeItem(id)
 
         if (id === activeChat) {
             const newActiveChat = updatedChats.length > 0 ? updatedChats[0].id : null
@@ -133,7 +132,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
                     <i className='bx bx-right-arrow-alt arrow' onClick={onGoBack}></i>
                 </div>
                 <div className="chat">
-                    {messages.map((msg, index) => (
+                    {(messages || []).map((msg, index) => (
                         <div key={index} className={msg.type}>
                             {msg.text} <span>{msg.timestamp}</span>
                         </div>
