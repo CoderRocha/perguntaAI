@@ -234,3 +234,85 @@
 .fa-paper-plane:hover {
   color: #fff;
 }
+
+.hamburger {
+  display: none;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.hamburger:hover {
+  opacity: 1;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .chat-list {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    z-index: 200;
+    background-color: #12121f;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .chat-list.open {
+    left: 0;
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .chat-title {
+    padding: 16px 18px;
+  }
+
+  .chat {
+    padding: 20px 16px;
+    gap: 14px;
+  }
+
+  .prompt,
+  .response {
+    max-width: 85%;
+  }
+
+  .msg-form {
+    padding: 12px 16px;
+    min-height: 7rem;
+    gap: 10px;
+  }
+
+  .picker {
+    position: fixed;
+    bottom: 7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+    width: min(380px, 95vw);
+  }
+
+  .picker em-emoji-picker {
+    width: 100%;
+  }
+}

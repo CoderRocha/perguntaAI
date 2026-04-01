@@ -8,6 +8,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
     const messages = useMemo(() => chats.find(chat => chat.id === activeChat)?.messages || [], [chats, activeChat])
     const [isTyping, setIsTyping] = useState(false)
     const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+    const [showSidebar, setShowSidebar] = useState(false)
     const chatEndRef = useRef(null)
 
     const handleEmojiSelect = (emoji) => {
@@ -98,6 +99,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
 
     const handleSelectChat = (id) => {
         setActiveChat(id)
+        setShowSidebar(false)
     }
 
     const handleDeleteChat = (id) => {
@@ -114,10 +116,13 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
 
     return (
         <div className='chat-app'>
-            <div className='chat-list'>
+            {showSidebar && (
+                <div className='sidebar-backdrop' onClick={() => setShowSidebar(false)}></div>
+            )}
+            <div className={`chat-list ${showSidebar ? 'open' : ''}`}>
                 <div className='chat-list-header'>
                     <h2>Chat List</h2>
-                    <i className='bx bx-edit-alt new-chat' onClick={() => onNewChat()}></i>
+                    <i className='bx bx-edit-alt new-chat' onClick={() => { onNewChat(); setShowSidebar(false) }}></i>
                 </div>
                 {chats.map((chat) => (
                     <div key={chat.id} className={`chat-list-item ${chat.id === activeChat ? 'active' : ''}`} onClick={() => handleSelectChat(chat.id)}>
@@ -128,6 +133,7 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
             </div>
             <div className='chat-window'>
                 <div className="chat-title">
+                    <i className='bx bx-menu hamburger' onClick={() => setShowSidebar((prev) => !prev)}></i>
                     <h3>Chat with AI</h3>
                     <i className='bx bx-right-arrow-alt arrow' onClick={onGoBack}></i>
                 </div>
