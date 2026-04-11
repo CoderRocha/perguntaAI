@@ -4,7 +4,7 @@ import './ChatBotStart.css'
 export default function ChatBotStart({ onStartChat }) {
   return (
     <div className='start-page'>
-      <button className='start-page-btn' onClick={onStartChat}>Chat AI</button>
+      <button className='start-page-btn' onClick={onStartChat}>Pergunta AI</button>
     </div>
   )
 }
