@@ -20,8 +20,8 @@ O **PerguntaAI** é um sistema web de chat com IA usando a API da OpenAI. O usu�
 ## Funcionalidades
 
 - **Chat com IA**
-  - Envio e recebimento de mensagems.
-  - IA baseada nos modelos da OpenAi.
+  - Envio e recebimento de mensagens.
+  - IA baseada nos modelos da OpenAI.
 
 - **Gerenciamento de chats**
   - Criação de novos chats com identificação por data e hora de criação.
@@ -36,6 +36,9 @@ O **PerguntaAI** é um sistema web de chat com IA usando a API da OpenAI. O usu�
   - **@emoji-mart/react**
   - **uuid**
 
+- **Backend**
+  - **Netlify Functions**
+
 ## Estrutura do Projeto
 
 - **`src/`**
@@ -46,12 +49,15 @@ O **PerguntaAI** é um sistema web de chat com IA usando a API da OpenAI. O usu�
   - **`Components/ChatBotStart.css`**
   - **`Components/ChatBotApp.jsx`**
   - **`Components/ChatBotApp.css`**
+  - **`netlify/functions/chat.js`**
+  - **`netlify.toml`**
 
 ## Instalação
 
 Pré-requisitos:
 
 - **Node.js**
+- **Netlify CLI**
 - API key da **OpenAI** ([platform.openai.com](https://platform.openai.com))
 
 1. **Instalar as dependências**
@@ -74,14 +80,14 @@ Pré-requisitos:
 ## Executando o Projeto
 
 ```bash
-npm run dev
+netlify dev
 ```
 
-Após rodar o comando, acesse a aplicação em `http://localhost:5173`.
+Após rodar o comando, acesse a aplicação em `http://localhost:8888`.
 
 ## Configurações
 
-As variáveis de ambiente estão em `.env.example`:
+As variáveis de ambiente estão em `.env.example`.
 
 ## Autor
 

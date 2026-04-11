@@ -48,11 +48,10 @@ export default function ChatBotApp({ onGoBack, chats, setChats, activeChat, setA
             localStorage.setItem('chats', JSON.stringify(updatedChats))
             setIsTyping(true)
 
-            const response = await fetch(`${import.meta.env.VITE_OPENAI_API_URL}`, {
+            const response = await fetch('/api/chat', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
                 },
                 body: JSON.stringify({
                     model: "gpt-3.5-turbo",
