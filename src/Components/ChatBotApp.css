@@ -61,7 +61,7 @@
 }
 
 .chat-list-item.active {
-  background: linear-gradient(135deg, #f42f5f, #8e25bf);
+  background: linear-gradient(135deg, #009c3b, #FFDF00);
 }
 
 .chat-list-item.active h4 {
@@ -157,14 +157,14 @@
 
 .prompt {
   align-self: flex-end;
-  background: linear-gradient(135deg, #e91e8c, #9c27b0);
+  background: linear-gradient(135deg, #009c3b, #FFDF00);
   color: #fff;
   border-bottom-right-radius: 4px;
 }
 
 .response {
   align-self: flex-start;
-  background: linear-gradient(135deg, #ff7043, #ef5350);
+  background: linear-gradient(135deg, #FFDF00, #009c3b);
   color: #fff;
   border-bottom-left-radius: 4px;
 }
